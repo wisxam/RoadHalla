@@ -1,12 +1,34 @@
-import { Paper, createTheme, styled } from '@mui/material';
+import { createTheme } from '@mui/material';
 
 const theme = createTheme({
 	palette: {
 		mode: 'dark',
+		background: {
+			paper: '#1A2130',
+		},
+		text: {
+			primary: '#FFF5E1',
+		},
 	},
 });
 
 const globalStyles = {
+	html: {
+		height: '100%',
+	},
+	body: {
+		height: '100%',
+		margin: 0,
+		padding: 0,
+		backgroundColor: '#1A2130',
+		color: theme.palette.text.primary,
+		overflowX: 'hidden',
+	},
+	'#root': {
+		minHeight: '100%',
+		display: 'flex',
+		flexDirection: 'column',
+	},
 	'*::-webkit-scrollbar': {
 		width: '8px',
 		height: '8px',
@@ -23,9 +45,4 @@ const globalStyles = {
 	},
 };
 
-const CustomPaper = styled(Paper)(() => ({
-	backgroundColor: '#FFF5E1',
-	color: '#1A2130',
-}));
-
-export { globalStyles, theme, CustomPaper };
+export { globalStyles, theme };

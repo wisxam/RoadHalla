@@ -15,6 +15,7 @@ import {
 	spearIcon,
 	swordIcon,
 } from '../assets/weaponIndex';
+import { Box } from '@mui/material';
 
 const iconMap = {
 	axe: axeIcon,
@@ -42,7 +43,7 @@ const WeaponLearning = () => {
 	const iconSrc = iconMap[suffix as keyof typeof iconMap] || null;
 
 	return (
-		<div>
+		<Box sx={{ minHeight: 'auto' }}>
 			{iconSrc ? (
 				<img
 					src={iconSrc}
@@ -51,7 +52,7 @@ const WeaponLearning = () => {
 			) : (
 				<p>No icon found for: {suffix}</p>
 			)}
-		</div>
+		</Box>
 	);
 };
 export default WeaponLearning;

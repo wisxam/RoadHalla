@@ -144,6 +144,7 @@ const Header = () => {
 							}}>
 							{weapons.map((option) => (
 								<MenuItem
+									key={option.name}
 									onClick={() => {
 										handleMobileMenuClose();
 										navigate(option.link);
