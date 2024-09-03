@@ -25,8 +25,8 @@ const globalStyles = {
 		overflowX: 'hidden',
 		backgroundImage: `url(${login})`,
 		backgroundSize: 'cover',
-		backgroundPosition: 'center', // Center the GIF
-		backgroundRepeat: 'no-repeat', // Prevent the GIF from repeating
+		backgroundPosition: 'center',
+		backgroundRepeat: 'no-repeat',
 	},
 	'#root': {
 		minHeight: '100%',

@@ -5,15 +5,15 @@ import { ScrollToTop } from '../components';
 const pageVariants = {
 	initial: {
 		opacity: 0,
-		x: 20, // Slide in from the right
+		x: 20,
 	},
 	enter: {
 		opacity: 1,
-		x: 0, // Slide to the center
+		x: 0,
 	},
 	exit: {
 		opacity: 0,
-		x: -20, // Slide out to the left
+		x: -20,
 	},
 };
 
@@ -28,9 +28,8 @@ const AnimatedRoutes = () => {
 				animate='enter'
 				exit='exit'
 				variants={pageVariants}
-				transition={{ duration: 0.5 }} // Adjust duration to make sure animations are smooth
-				style={{ position: 'relative', width: '100%', height: '100%' }} // Ensure the div occupies space correctly
-			>
+				transition={{ duration: 0.5 }}
+				style={{ position: 'relative', width: '100%', height: '100%' }}>
 				<ScrollToTop />
 				<Outlet />
 			</motion.div>
