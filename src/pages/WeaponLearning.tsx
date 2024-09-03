@@ -43,7 +43,7 @@ const WeaponLearning = () => {
 	const iconSrc = iconMap[suffix as keyof typeof iconMap] || null;
 
 	return (
-		<Box sx={{ minHeight: 'auto' }}>
+		<Box>
 			{iconSrc ? (
 				<img
 					src={iconSrc}

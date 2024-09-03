@@ -1,5 +1,7 @@
 import { createTheme } from '@mui/material';
 
+import { login } from '../assets';
+
 const theme = createTheme({
 	palette: {
 		mode: 'dark',
@@ -18,11 +20,13 @@ const globalStyles = {
 	},
 	body: {
 		height: '100%',
-		margin: 0,
-		padding: 0,
-		backgroundColor: '#1A2130',
+		backgroundColor: 'black',
 		color: theme.palette.text.primary,
 		overflowX: 'hidden',
+		backgroundImage: `url(${login})`,
+		backgroundSize: 'cover',
+		backgroundPosition: 'center', // Center the GIF
+		backgroundRepeat: 'no-repeat', // Prevent the GIF from repeating
 	},
 	'#root': {
 		minHeight: '100%',

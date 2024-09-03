@@ -5,6 +5,10 @@ import allWeaponsGoldforged from './allWeaponsGoldforged.jpg';
 import movementBrawlhalla from './filledBrawlMovement.jpg';
 import trueCombos from './trueCombos.jpg';
 import jaeyunPopCorn from './jaeyunPopcorn.png';
+import nix from './nix.gif';
+import fait from './faitgif.gif';
+import login from './login.gif';
+import staticBg from './staticBg.png';
 
 export {
 	restHereBrawler,
@@ -14,4 +18,8 @@ export {
 	movementBrawlhalla,
 	trueCombos,
 	jaeyunPopCorn,
+	nix,
+	fait,
+	login,
+	staticBg,
 };

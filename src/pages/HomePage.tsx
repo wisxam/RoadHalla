@@ -4,6 +4,7 @@ const HomePage = () => {
 	return (
 		<>
 			<Hero />
+			{/* <Hero2Try /> */}
 		</>
 	);
 };

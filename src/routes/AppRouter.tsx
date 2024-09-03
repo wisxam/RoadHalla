@@ -1,8 +1,8 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { MainLayout } from '../layout';
 import { Error, Show, HomePage } from '../pages';
-import AnimatedRoutes from './AnimatedRoutes';
 import WeaponLearning from '../pages/WeaponLearning';
+import AnimatedRoutes from './AnimatedRoutes';
 
 const router = createBrowserRouter([
 	{

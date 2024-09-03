@@ -7,11 +7,8 @@ import { globalStyles, theme } from './styles/globalStyles.js';
 import { ThemeProvider } from 'styled-components';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-	<StrictMode>
-		<ThemeProvider theme={theme}>
-			<CssBaseline />
-			<GlobalStyles styles={globalStyles} />
-			<AppRouter />
-		</ThemeProvider>
-	</StrictMode>
+	<>
+		<GlobalStyles styles={globalStyles} />
+		<AppRouter />
+	</>
 );

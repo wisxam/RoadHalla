@@ -93,6 +93,14 @@ const Header = () => {
 								sx={{ fontSize: 23, color: '#FFF5E1' }}>
 								Weapons
 							</Button>
+							<Button
+								onClick={() => {
+									navigate('/show');
+								}}
+								className='font-bold translate-x-10 hover:font-black hover:text-[#9AC8CD]'
+								sx={{ fontSize: 23, color: '#FFF5E1' }}>
+								Weapons
+							</Button>
 							<Menu
 								anchorEl={anchorEl}
 								open={Boolean(anchorEl)}
