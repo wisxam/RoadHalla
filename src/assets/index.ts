@@ -9,6 +9,7 @@ import nix from './nix.gif';
 import fait from './faitgif.gif';
 import login from './login.gif';
 import staticBg from './staticBg.png';
+import gentleThatch from './gentleThatch.png';
 
 export {
 	restHereBrawler,
@@ -22,4 +23,5 @@ export {
 	fait,
 	login,
 	staticBg,
+	gentleThatch,
 };

@@ -1,12 +1,21 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+// mui
 import { Box, Container, Typography, IconButton, Grid } from '@mui/material';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+// framer-motion
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay } from 'swiper/modules';
+// swiper
+import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+// assets
 import {
 	allWeaponsGoldforged,
 	jaeyunPopCorn,
+	login,
 	movementBrawlhalla,
 	trueCombos,
 } from '../../assets';
@@ -15,6 +24,7 @@ const Hero = () => {
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const { scrollY } = useScroll();
 	const opacity = useTransform(scrollY, [0, 500], [1, 0]);
+	const swiperRef = useRef<SwiperClass | null>(null);
 
 	const slideTexts = [
 		'Learn and master all the available weapons with ease.',
@@ -30,11 +40,16 @@ const Hero = () => {
 				display: 'flex',
 				alignItems: 'center',
 				justifyContent: 'center',
-				minHeight: '80vh',
+				minHeight: 'auto',
 				backgroundColor: '#1A2130',
 				color: '#FFF5E1',
 				opacity: 0.9,
 				padding: '20px',
+				backgroundImage: `url(${login})`,
+				backgroundSize: 'cover',
+				backgroundPosition: 'center',
+				backgroundRepeat: 'no-repeat',
+				backgroundBlendMode: 'overlay',
 			}}>
 			<Container maxWidth='lg'>
 				<Grid
@@ -66,7 +81,7 @@ const Hero = () => {
 										src={jaeyunPopCorn}
 										alt='Slide 2'
 										sx={{
-											width: '100%',
+											width: 'auto',
 											height: '100%',
 											objectFit: 'cover',
 											borderRadius: '12px',
@@ -96,20 +111,24 @@ const Hero = () => {
 						item
 						xs={12}
 						md={6}>
-						<Box
-							sx={{
-								width: '100%',
-								height: { xs: '300px', md: '400px' },
-								overflow: 'hidden',
-							}}>
+						<Box>
 							<motion.div style={{ opacity }}>
 								<Swiper
-									modules={[Autoplay]}
+									modules={[Autoplay, Navigation, Pagination]}
 									spaceBetween={30}
 									slidesPerView={1}
 									loop={true}
 									autoplay={{ delay: 3000, disableOnInteraction: false }}
-									onSlideChange={(swiper) => setCurrentSlide(swiper.realIndex)}>
+									onSlideChange={(swiper) => setCurrentSlide(swiper.realIndex)}
+									pagination={{
+										clickable: true,
+										renderBullet: (_, className) => {
+											return `<span class="${className}" style="background-color: black; width: 12px; height: 12px; margin: 4px; border-radius: 50%;"></span>`;
+										},
+									}}
+									onSwiper={(swiper) => {
+										swiperRef.current = swiper;
+									}}>
 									<SwiperSlide>
 										<Box
 											component='img'
@@ -150,6 +169,44 @@ const Hero = () => {
 										/>
 									</SwiperSlide>
 								</Swiper>
+								<Box
+									sx={{
+										display: 'flex',
+										justifyContent: 'space-between',
+										marginTop: '20px',
+										// '@media (max-width: 600px)': {
+										// 	justifyContent: 'space-around',
+										// },
+									}}>
+									<IconButton
+										onClick={() => swiperRef.current?.slidePrev()}
+										sx={{
+											'&:hover': {
+												backgroundColor: '#1A2130',
+											},
+											'&:active': {
+												backgroundColor: '#FFF5E1',
+											},
+										}}>
+										<KeyboardArrowLeftIcon
+											sx={{ fontSize: 40, color: '#FFF5E1' }}
+										/>
+									</IconButton>
+									<IconButton
+										onClick={() => swiperRef.current?.slideNext()}
+										sx={{
+											'&:hover': {
+												backgroundColor: '#1A2130',
+											},
+											'&:active': {
+												backgroundColor: '#FFF5E1',
+											},
+										}}>
+										<KeyboardArrowRightIcon
+											sx={{ fontSize: 40, color: '#FFF5E1' }}
+										/>
+									</IconButton>
+								</Box>
 							</motion.div>
 						</Box>
 					</Grid>

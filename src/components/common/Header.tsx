@@ -45,6 +45,7 @@ const Header = () => {
 				pointerEvents,
 				position: 'sticky',
 				top: 0,
+				backgroundColor: 'transparent',
 			}}>
 			<AppBar
 				sx={{

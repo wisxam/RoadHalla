@@ -1,7 +1,5 @@
 import { createTheme } from '@mui/material';
 
-import { login } from '../assets';
-
 const theme = createTheme({
 	palette: {
 		mode: 'dark',
@@ -20,13 +18,8 @@ const globalStyles = {
 	},
 	body: {
 		height: '100%',
-		backgroundColor: 'black',
-		color: theme.palette.text.primary,
+		backgroundColor: '#FFF5E1',
 		overflowX: 'hidden',
-		backgroundImage: `url(${login})`,
-		backgroundSize: 'cover',
-		backgroundPosition: 'center',
-		backgroundRepeat: 'no-repeat',
 	},
 	'#root': {
 		minHeight: '100%',
