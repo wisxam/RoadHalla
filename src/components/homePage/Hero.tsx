@@ -1,8 +1,6 @@
 import { useRef, useState } from 'react';
 // mui
 import { Box, Container, Typography, IconButton, Grid } from '@mui/material';
-import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 // framer-motion
 import { motion, useScroll, useTransform } from 'framer-motion';
 // swiper
@@ -12,27 +10,18 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 // assets
-import {
-	allWeaponsGoldforged,
-	jaeyunPopCorn,
-	login,
-	movementBrawlhalla,
-	trueCombos,
-} from '../../assets';
+import { jaeyunPopCorn, login } from '../../assets';
+
+import { slideTexts } from '../../data/headerData';
+import SwiperButtons from '../SwiperButtons';
 
 const Hero = () => {
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const { scrollY } = useScroll();
-	const opacity = useTransform(scrollY, [0, 500], [1, 0]);
+	const opacity = useTransform(scrollY, [0, 600], [1, 0]);
 	const swiperRef = useRef<SwiperClass | null>(null);
 
-	const slideTexts = [
-		'Learn and master all the available weapons with ease.',
-		'Discover the true combos and be the king of your platform.',
-		'Master the movement techniques to ensure the best performance over your opponent.',
-	];
-
-	const currentSlideText = slideTexts[currentSlide];
+	const currentSlideText = slideTexts[currentSlide].text;
 
 	return (
 		<Box
@@ -50,6 +39,7 @@ const Hero = () => {
 				backgroundPosition: 'center',
 				backgroundRepeat: 'no-repeat',
 				backgroundBlendMode: 'overlay',
+				fontFamily: 'Bebas Neue',
 			}}>
 			<Container maxWidth='lg'>
 				<Grid
@@ -90,20 +80,40 @@ const Hero = () => {
 								</IconButton>
 								<Typography
 									variant='h2'
-									gutterBottom>
+									gutterBottom
+									sx={{
+										fontFamily: 'fantasy',
+										color: '#ffdc95',
+										textShadow: `
+										-2px -6px 0 #000, 
+										1px -1px 0 #000,  
+										-1px 1px 0 #000,   
+										1px 1px 0 #000     
+										`,
+									}}>
 									LearnHalla
 								</Typography>
-							</motion.div>
-							<motion.div
-								initial={{ opacity: 0, x: -20 }}
-								animate={{ opacity: 1, x: 0 }}
-								transition={{ duration: 0.5 }}
-								style={{ opacity: opacity }}>
-								<Typography
-									variant='h5'
-									paragraph>
-									{currentSlideText}
-								</Typography>
+								<motion.div
+									key={currentSlideText}
+									initial={{ opacity: 0, x: 20 }}
+									animate={{ opacity: 1, x: 0 }}
+									transition={{ duration: 0.5 }}>
+									<Typography
+										variant='h5'
+										paragraph
+										sx={{
+											fontFamily: 'fantasy',
+											color: '#ffdc95',
+											textShadow: `
+												-2px -6px 0 #000, 
+												1px -1px 0 #000,  
+												-1px 1px 0 #000,   
+												1px 1px 0 #000     
+												`,
+										}}>
+										{currentSlideText}
+									</Typography>
+								</motion.div>
 							</motion.div>
 						</Box>
 					</Grid>
@@ -123,90 +133,34 @@ const Hero = () => {
 									pagination={{
 										clickable: true,
 										renderBullet: (_, className) => {
-											return `<span class="${className}" style="background-color: black; width: 12px; height: 12px; margin: 4px; border-radius: 50%;"></span>`;
+											return `<span class="${className}" style="background-color: #FFF5E1; width: 12px; height: 12px; margin: 4px; border-radius: 50%;"></span>`;
 										},
 									}}
 									onSwiper={(swiper) => {
 										swiperRef.current = swiper;
 									}}>
-									<SwiperSlide>
-										<Box
-											component='img'
-											src={allWeaponsGoldforged}
-											alt='Slide 1'
-											sx={{
-												width: '100%',
-												height: '100%',
-												objectFit: 'cover',
-												borderRadius: '12px',
-											}}
-										/>
-									</SwiperSlide>
-									<SwiperSlide>
-										<Box
-											component='img'
-											src={movementBrawlhalla}
-											alt='Slide 2'
-											sx={{
-												width: '100%',
-												height: '100%',
-												objectFit: 'cover',
-												borderRadius: '12px',
-											}}
-										/>
-									</SwiperSlide>
-									<SwiperSlide>
-										<Box
-											component='img'
-											src={trueCombos}
-											alt='Slide 3'
-											sx={{
-												width: '100%',
-												height: '100%',
-												objectFit: 'cover',
-												borderRadius: '12px',
-											}}
-										/>
-									</SwiperSlide>
+									{slideTexts.map((slide) => (
+										<SwiperSlide key={slide.text}>
+											<Box
+												component='img'
+												src={slide.image}
+												alt={slide.text}
+												sx={{
+													width: '100%',
+													height: '100%',
+													objectFit: 'cover',
+													borderRadius: '12px',
+												}}
+											/>
+										</SwiperSlide>
+									))}
 								</Swiper>
-								<Box
-									sx={{
-										display: 'flex',
-										justifyContent: 'space-between',
-										marginTop: '20px',
-										// '@media (max-width: 600px)': {
-										// 	justifyContent: 'space-around',
-										// },
-									}}>
-									<IconButton
-										onClick={() => swiperRef.current?.slidePrev()}
-										sx={{
-											'&:hover': {
-												backgroundColor: '#1A2130',
-											},
-											'&:active': {
-												backgroundColor: '#FFF5E1',
-											},
-										}}>
-										<KeyboardArrowLeftIcon
-											sx={{ fontSize: 40, color: '#FFF5E1' }}
-										/>
-									</IconButton>
-									<IconButton
-										onClick={() => swiperRef.current?.slideNext()}
-										sx={{
-											'&:hover': {
-												backgroundColor: '#1A2130',
-											},
-											'&:active': {
-												backgroundColor: '#FFF5E1',
-											},
-										}}>
-										<KeyboardArrowRightIcon
-											sx={{ fontSize: 40, color: '#FFF5E1' }}
-										/>
-									</IconButton>
-								</Box>
+								<SwiperButtons
+									swiperRef={swiperRef}
+									primaryVariant='#1A2130'
+									secondaryVariant='#FFF5E1'
+									hoverVariant='#5F5959'
+								/>
 							</motion.div>
 						</Box>
 					</Grid>

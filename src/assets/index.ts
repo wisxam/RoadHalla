@@ -10,6 +10,8 @@ import fait from './faitgif.gif';
 import login from './login.gif';
 import staticBg from './staticBg.png';
 import gentleThatch from './gentleThatch.png';
+import learn from './learn.png';
+import teaching from './teaching.png';
 
 export {
 	restHereBrawler,
@@ -24,4 +26,6 @@ export {
 	login,
 	staticBg,
 	gentleThatch,
+	learn,
+	teaching,
 };

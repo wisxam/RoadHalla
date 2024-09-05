@@ -1,21 +1,57 @@
-import { Box, Button } from '@mui/material';
-import { useSwiper } from 'swiper/react';
+import { Box, IconButton } from '@mui/material';
+import { SwiperClass } from 'swiper/react';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
-const SwiperButtons = () => {
-	const swiper = useSwiper();
-
+const SwiperButtons = ({
+	swiperRef,
+	primaryVariant,
+	secondaryVariant,
+	hoverVariant,
+}: {
+	swiperRef: React.RefObject<SwiperClass>;
+	primaryVariant: string;
+	secondaryVariant: string;
+	hoverVariant: string;
+}) => {
 	return (
 		<Box
 			sx={{
 				display: 'flex',
-				justifyContent: 'center',
-				marginTop: 'auto',
-				marginBottom: 'auto',
-				margin: '20px',
-				gap: '20px',
+				justifyContent: 'space-between',
+				marginTop: '20px',
+				// '@media (max-width: 600px)': {
+				// 	justifyContent: 'space-around',
+				// },
 			}}>
-			<Button onClick={() => swiper.slidePrev()}>Left</Button>
-			<Button onClick={() => swiper.slideNext()}>Right</Button>
+			<IconButton
+				onClick={() => swiperRef.current?.slidePrev()}
+				sx={{
+					backgroundColor: primaryVariant,
+					'&:hover': {
+						backgroundColor: hoverVariant,
+					},
+					'&:active': {
+						backgroundColor: primaryVariant,
+					},
+				}}>
+				<KeyboardArrowLeftIcon sx={{ fontSize: 40, color: secondaryVariant }} />
+			</IconButton>
+			<IconButton
+				onClick={() => swiperRef.current?.slideNext()}
+				sx={{
+					backgroundColor: primaryVariant,
+					'&:hover': {
+						backgroundColor: hoverVariant,
+					},
+					'&:active': {
+						backgroundColor: hoverVariant,
+					},
+				}}>
+				<KeyboardArrowRightIcon
+					sx={{ fontSize: 40, color: secondaryVariant }}
+				/>
+			</IconButton>
 		</Box>
 	);
 };

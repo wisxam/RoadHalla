@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -11,12 +11,16 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import IconButton from '@mui/material/IconButton';
 import { weapons } from '../../data/headerData';
 import { temporaryLogoNoBg } from '../../assets';
+import MenuIcon from '@mui/icons-material/Menu';
+import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 
 const Header = () => {
-	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-	const [mobileMenuOpen, setMobileMenuOpen] =
-		React.useState<null | HTMLElement>(null);
+	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+	const [mobileMenuOpen, setMobileMenuOpen] = useState<null | HTMLElement>(
+		null
+	);
 	const navigate = useNavigate();
+	const [menuBarOpen, setMenuBarOpen] = useState(false);
 
 	const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
 		setAnchorEl(event.currentTarget);
@@ -27,10 +31,12 @@ const Header = () => {
 	};
 
 	const handleMobileMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
+		setMenuBarOpen(!menuBarOpen);
 		setMobileMenuOpen(event.currentTarget);
 	};
 
 	const handleMobileMenuClose = () => {
+		setMenuBarOpen(!menuBarOpen);
 		setMobileMenuOpen(null);
 	};
 
@@ -46,6 +52,7 @@ const Header = () => {
 				position: 'sticky',
 				top: 0,
 				backgroundColor: 'transparent',
+				zIndex: 1,
 			}}>
 			<AppBar
 				sx={{
@@ -55,7 +62,6 @@ const Header = () => {
 					background: '#1A2130',
 					transition: 'opacity 0.5s ease-in-out',
 					height: '60px',
-					zIndex: (theme) => theme.zIndex.drawer + 1,
 				}}>
 				<Container maxWidth='xl'>
 					<Toolbar
@@ -70,7 +76,7 @@ const Header = () => {
 							aria-label='menu'
 							sx={{ display: { xs: 'block', md: 'none' } }}
 							onClick={handleMobileMenuOpen}>
-							<span>Menu</span>
+							{menuBarOpen ? <MenuOpenIcon /> : <MenuIcon />}
 						</IconButton>
 						<Link to='/'>
 							<img

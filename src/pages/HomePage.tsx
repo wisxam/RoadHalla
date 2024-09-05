@@ -1,11 +1,10 @@
-import { Hero } from '../components/homePage';
-import Hero2Try from '../components/homePage/Hero2Try';
+import { Hero, WhyLearnHalla } from '../components/homePage';
 
 const HomePage = () => {
 	return (
 		<>
 			<Hero />
-			<Hero2Try />
+			<WhyLearnHalla />
 		</>
 	);
 };

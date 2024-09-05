@@ -1,3 +1,4 @@
-import tryvideo from './tryvideo.mp4';
+import alucardClip from './alucardClip.mp4';
+import jaeyunClip from './jaeyunClip.mp4';
 
-export { tryvideo };
+export { alucardClip, jaeyunClip };
