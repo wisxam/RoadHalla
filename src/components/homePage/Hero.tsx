@@ -12,11 +12,11 @@ import 'swiper/css/pagination';
 // assets
 import { jaeyunPopCorn, login } from '../../assets';
 
-import { slideTexts } from '../../data/headerData';
+import { slideTexts } from '../../data/HeaderData';
 import SwiperButtons from '../SwiperButtons';
 
 const Hero = () => {
-	const [currentSlide, setCurrentSlide] = useState(0);
+	const [currentSlide, setCurrentSlide] = useState<number>(0);
 	const { scrollY } = useScroll();
 	const opacity = useTransform(scrollY, [0, 600], [1, 0]);
 	const swiperRef = useRef<SwiperClass | null>(null);
@@ -24,40 +24,39 @@ const Hero = () => {
 	const currentSlideText = slideTexts[currentSlide].text;
 
 	return (
-		<Box
-			sx={{
-				display: 'flex',
-				alignItems: 'center',
-				justifyContent: 'center',
-				minHeight: 'auto',
-				backgroundColor: '#1A2130',
-				color: '#FFF5E1',
-				opacity: 0.9,
-				padding: '20px',
-				backgroundImage: `url(${login})`,
-				backgroundSize: 'cover',
-				backgroundPosition: 'center',
-				backgroundRepeat: 'no-repeat',
-				backgroundBlendMode: 'overlay',
-				fontFamily: 'Bebas Neue',
-			}}>
-			<Container maxWidth='lg'>
-				<Grid
-					container
-					spacing={4}
-					alignItems='center'
-					justifyContent='center'>
+		<motion.div style={{ opacity }}>
+			<Box
+				sx={{
+					display: 'flex',
+					alignItems: 'center',
+					justifyContent: 'center',
+					minHeight: 'auto',
+					backgroundColor: '#1A2130',
+					padding: '20px',
+					opacity: 0.9,
+					backgroundImage: `url(${login})`,
+					backgroundSize: 'cover',
+					backgroundPosition: 'center',
+					backgroundRepeat: 'no-repeat',
+					backgroundBlendMode: 'overlay',
+					fontFamily: 'Bebas Neue',
+				}}>
+				<Container maxWidth='lg'>
 					<Grid
-						item
-						xs={12}
-						md={6}
-						sx={{
-							display: 'flex',
-							flexDirection: 'column',
-							alignItems: { xs: 'center', md: 'flex-start' },
-						}}>
-						<Box sx={{ textAlign: { xs: 'center', md: 'left' } }}>
-							<motion.div style={{ opacity }}>
+						container
+						spacing={4}
+						alignItems='center'
+						justifyContent='center'>
+						<Grid
+							item
+							xs={12}
+							md={6}
+							sx={{
+								display: 'flex',
+								flexDirection: 'column',
+								alignItems: { xs: 'center', md: 'flex-start' },
+							}}>
+							<Box sx={{ textAlign: { xs: 'center', md: 'left' } }}>
 								<IconButton
 									disabled
 									sx={{
@@ -114,59 +113,61 @@ const Hero = () => {
 										{currentSlideText}
 									</Typography>
 								</motion.div>
-							</motion.div>
-						</Box>
+							</Box>
+						</Grid>
+						<Grid
+							item
+							xs={12}
+							md={6}>
+							<Box>
+								<motion.div style={{ opacity }}>
+									<Swiper
+										modules={[Autoplay, Navigation, Pagination]}
+										spaceBetween={30}
+										slidesPerView={1}
+										loop={true}
+										autoplay={{ delay: 3000, disableOnInteraction: false }}
+										onSlideChange={(swiper) =>
+											setCurrentSlide(swiper.realIndex)
+										}
+										pagination={{
+											clickable: true,
+											renderBullet: (_, className) => {
+												return `<span class="${className}" style="background-color: #FFF5E1; width: 12px; height: 12px; margin: 4px; border-radius: 50%;"></span>`;
+											},
+										}}
+										onSwiper={(swiper) => {
+											swiperRef.current = swiper;
+										}}>
+										{slideTexts.map((slide) => (
+											<SwiperSlide key={slide.text}>
+												<Box
+													component='img'
+													src={slide.image}
+													alt={slide.text}
+													sx={{
+														width: '100%',
+														height: '100%',
+														objectFit: 'cover',
+														borderRadius: '12px',
+													}}
+												/>
+											</SwiperSlide>
+										))}
+									</Swiper>
+									<SwiperButtons
+										swiperRef={swiperRef}
+										primaryVariant='#1A2130'
+										secondaryVariant='#FFF5E1'
+										hoverVariant='#5F5959'
+									/>
+								</motion.div>
+							</Box>
+						</Grid>
 					</Grid>
-					<Grid
-						item
-						xs={12}
-						md={6}>
-						<Box>
-							<motion.div style={{ opacity }}>
-								<Swiper
-									modules={[Autoplay, Navigation, Pagination]}
-									spaceBetween={30}
-									slidesPerView={1}
-									loop={true}
-									autoplay={{ delay: 3000, disableOnInteraction: false }}
-									onSlideChange={(swiper) => setCurrentSlide(swiper.realIndex)}
-									pagination={{
-										clickable: true,
-										renderBullet: (_, className) => {
-											return `<span class="${className}" style="background-color: #FFF5E1; width: 12px; height: 12px; margin: 4px; border-radius: 50%;"></span>`;
-										},
-									}}
-									onSwiper={(swiper) => {
-										swiperRef.current = swiper;
-									}}>
-									{slideTexts.map((slide) => (
-										<SwiperSlide key={slide.text}>
-											<Box
-												component='img'
-												src={slide.image}
-												alt={slide.text}
-												sx={{
-													width: '100%',
-													height: '100%',
-													objectFit: 'cover',
-													borderRadius: '12px',
-												}}
-											/>
-										</SwiperSlide>
-									))}
-								</Swiper>
-								<SwiperButtons
-									swiperRef={swiperRef}
-									primaryVariant='#1A2130'
-									secondaryVariant='#FFF5E1'
-									hoverVariant='#5F5959'
-								/>
-							</motion.div>
-						</Box>
-					</Grid>
-				</Grid>
-			</Container>
-		</Box>
+				</Container>
+			</Box>
+		</motion.div>
 	);
 };
 

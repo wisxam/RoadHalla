@@ -1,7 +1,6 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ScrollToTop } from '../components';
-import { Footer } from '../components/common';
 
 const pageVariants = {
 	initial: {
@@ -34,7 +33,6 @@ const AnimatedRoutes = () => {
 				<ScrollToTop />
 				<Outlet />
 			</motion.div>
-			<Footer />
 		</AnimatePresence>
 	);
 };

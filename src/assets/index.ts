@@ -12,6 +12,12 @@ import staticBg from './staticBg.png';
 import gentleThatch from './gentleThatch.png';
 import learn from './learn.png';
 import teaching from './teaching.png';
+import sirRolandCrying from './sirRolandCrying.webp';
+import nixWaiting from './nixWaiting.webp';
+import faitGlowing from './faitGlowing.webp';
+import elegantMunin from './elegantMunin.webp';
+import evhilRedraptor from './evilRedraptor.webp';
+import korThumbsUp from './korThumbsUp.webp';
 
 export {
 	restHereBrawler,
@@ -28,4 +34,10 @@ export {
 	gentleThatch,
 	learn,
 	teaching,
+	sirRolandCrying,
+	nixWaiting,
+	faitGlowing,
+	elegantMunin,
+	evhilRedraptor,
+	korThumbsUp,
 };

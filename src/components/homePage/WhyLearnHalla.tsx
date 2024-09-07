@@ -13,7 +13,7 @@ const WhyLearnHalla = () => {
 	const [videoPlaying, setVideoPlaying] = useState(whyLearnHalla[0].videoUrl);
 	const [isBackgroundAnimating, setIsBackgroundAnimating] = useState(false);
 	const { scrollY } = useScroll();
-	const opacity = useTransform(scrollY, [600, 1200], [1, 0]);
+	const opacity = useTransform(scrollY, [800, 1900], [1, 0]);
 
 	// useEffect(() => {
 	// 	const handleResize = () => {
@@ -49,7 +49,6 @@ const WhyLearnHalla = () => {
 	return (
 		<Box
 			sx={{
-				backgroundColor: 'black',
 				display: 'flex',
 				alignItems: 'center',
 				justifyContent: 'center',

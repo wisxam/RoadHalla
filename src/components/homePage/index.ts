@@ -1,4 +1,5 @@
 import Hero from './Hero';
 import WhyLearnHalla from './WhyLearnHalla';
+import Advantages from './Advantages';
 
-export { Hero, WhyLearnHalla };
+export { Hero, WhyLearnHalla, Advantages };

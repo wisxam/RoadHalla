@@ -19,7 +19,7 @@ const globalStyles = {
 	body: {
 		fontFamily: 'Barcade',
 		height: '100%',
-		backgroundColor: '#FFF5E1',
+		backgroundColor: '#1A2130',
 		overflowX: 'hidden',
 	},
 	'#root': {

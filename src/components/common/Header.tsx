@@ -9,10 +9,11 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import IconButton from '@mui/material/IconButton';
-import { weapons } from '../../data/headerData';
+import { weapons } from '../../data/HeaderData';
 import { temporaryLogoNoBg } from '../../assets';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
+import { Typography } from '@mui/material';
 
 const Header = () => {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -51,14 +52,12 @@ const Header = () => {
 				pointerEvents,
 				position: 'sticky',
 				top: 0,
-				backgroundColor: 'transparent',
 				zIndex: 1,
 			}}>
 			<AppBar
 				sx={{
 					position: 'sticky',
 					top: 0,
-					boxShadow: 10,
 					background: '#1A2130',
 					transition: 'opacity 0.5s ease-in-out',
 					height: '60px',
@@ -135,7 +134,7 @@ const Header = () => {
 											opacity: opacity.get(),
 											transition: 'opacity 0.5s ease-in-out',
 										}}>
-										<span>{option.name}</span>
+										<Typography>{option.name}</Typography>
 										<img
 											src={option.icon}
 											alt={option.name}
@@ -173,7 +172,7 @@ const Header = () => {
 										opacity: opacity.get(),
 										transition: 'opacity 0.5s ease-in-out',
 									}}>
-									<span>{option.name}</span>
+									<Typography>{option.name}</Typography>
 									<img
 										src={option.icon}
 										alt={option.name}
