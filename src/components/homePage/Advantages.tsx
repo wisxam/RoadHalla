@@ -1,8 +1,11 @@
 import { Box, Container, Grid, IconButton, Typography } from '@mui/material';
 import DiscreteSlider from '../DiscreteSlider';
-import { brawlhallaValues } from '../../data/sliderData';
+import { brawlhallaValues } from '../../data/SliderData';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { yumiko } from '../../assets';
+import LazyBackground from '../LazyBackground';
+import LazyImage from '../LazyImage';
 
 const Advantages = () => {
 	const [currentSliderValue, setCurrentSliderValue] = useState(
@@ -18,13 +21,19 @@ const Advantages = () => {
 	);
 
 	return (
-		<Box
+		<LazyBackground
+			src={yumiko}
 			sx={{
 				display: 'flex',
+				alignItems: 'center',
+				justifyContent: 'center',
 				minHeight: 'auto',
+				backgroundColor: '#1A2130',
 				padding: '20px',
-				color: 'white',
-				backgroundColor: '#FFF5E1',
+				backgroundSize: 'cover',
+				backgroundPosition: 'center',
+				backgroundRepeat: 'no-repeat',
+				backgroundBlendMode: 'overlay',
 			}}>
 			<Container maxWidth='lg'>
 				<Grid
@@ -33,6 +42,7 @@ const Advantages = () => {
 					<Typography
 						variant='h4'
 						sx={{
+							textAlign: 'center',
 							fontFamily: 'fantasy',
 							marginTop: { xs: 'auto', md: '20px' },
 							mb: 'auto',
@@ -50,12 +60,7 @@ const Advantages = () => {
 					container
 					justifyContent='center'
 					sx={{ mt: '40px' }}>
-					<Grid
-						item
-						xs={12}
-						sm={8}>
-						<DiscreteSlider onChange={handleSliderChange} />
-					</Grid>
+					<DiscreteSlider onChange={handleSliderChange} />
 					<Grid
 						container
 						direction='column'
@@ -72,10 +77,9 @@ const Advantages = () => {
 							}}>
 							<motion.div
 								key={currentSliderValue}
-								initial={{ opacity: 0, x: -10 }}
+								initial={{ opacity: 0, x: 0 }}
 								animate={{ opacity: 1, x: 0 }}
-								exit={{ opacity: 0, x: -20 }}
-								transition={{ duration: 0.5 }}
+								transition={{ duration: 0.7 }}
 								style={{
 									display: 'flex',
 									flexDirection: 'column',
@@ -85,16 +89,15 @@ const Advantages = () => {
 								<IconButton
 									disabled
 									sx={{
-										fontSize: '50px',
 										marginBottom: '20px',
 										padding: 0,
 										display: 'flex',
 										justifyContent: 'center',
 										alignItems: 'center',
+										height: 130,
 									}}>
-									<Box
-										component='img'
-										src={currentSlider?.icon}
+									<LazyImage
+										src={currentSlider?.icon || ''}
 										alt={currentSlider?.label || 'Slide'}
 										sx={{
 											width: 'auto',
@@ -123,8 +126,7 @@ const Advantages = () => {
 					</Grid>
 				</Grid>
 			</Container>
-		</Box>
+		</LazyBackground>
 	);
 };
-
 export default Advantages;

@@ -4,47 +4,41 @@ import { motion, useTransform, useScroll } from 'framer-motion';
 import 'swiper/css';
 import { whyLearnHalla } from '../../data/WhyLearnHallaContent';
 import { gentleThatch } from '../../assets';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import SwiperButtons from '../SwiperButtons';
+import LazyVideo from '../LazyVideo'; // Import the LazyVideo component
+import LazyImage from '../LazyImage';
 
 const WhyLearnHalla = () => {
-	// const [scrollRange, setScrollRange] = useState([900, 1400]);
+	const videoRefs = useRef<HTMLVideoElement[]>([]);
 	const swiperRef = useRef<SwiperClass | null>(null);
 	const [videoPlaying, setVideoPlaying] = useState(whyLearnHalla[0].videoUrl);
 	const [isBackgroundAnimating, setIsBackgroundAnimating] = useState(false);
 	const { scrollY } = useScroll();
 	const opacity = useTransform(scrollY, [800, 1900], [1, 0]);
 
-	// useEffect(() => {
-	// 	const handleResize = () => {
-	// 		const height = window.innerHeight;
+	useEffect(() => {
+		const handleSlideChange = (swiper: SwiperClass) => {
+			const currentSlideIndex = swiper.realIndex % whyLearnHalla.length;
+			setIsBackgroundAnimating(true);
 
-	// 		if (height < 600) {
-	// 			// Mobile
-	// 			setScrollRange([600, 1000]);
-	// 		} else if (height < 1200) {
-	// 			// Tablet
-	// 			setScrollRange([900, 1400]);
-	// 		} else {
-	// 			// Desktop
-	// 			setScrollRange([1100, 1400]);
-	// 		}
-	// 	};
+			videoRefs.current.forEach((video) => {
+				if (video) {
+					video.pause();
+					video.muted = true;
+				}
+			});
 
-	// 	handleResize();
-	// 	window.addEventListener('resize', handleResize);
+			setTimeout(() => {
+				setVideoPlaying(whyLearnHalla[currentSlideIndex].videoUrl);
+				setIsBackgroundAnimating(false);
+			}, 300);
+		};
 
-	// 	return () => window.removeEventListener('resize', handleResize);
-	// }, []);
-
-	const handleSlideChange = (swiper: SwiperClass) => {
-		const currentSlideIndex = swiper.realIndex % whyLearnHalla.length;
-		setIsBackgroundAnimating(true);
-		setTimeout(() => {
-			setVideoPlaying(whyLearnHalla[currentSlideIndex].videoUrl);
-			setIsBackgroundAnimating(false);
-		}, 300);
-	};
+		if (swiperRef.current) {
+			swiperRef.current.on('slideChange', handleSlideChange);
+		}
+	}, [videoPlaying]);
 
 	return (
 		<Box
@@ -53,7 +47,6 @@ const WhyLearnHalla = () => {
 				alignItems: 'center',
 				justifyContent: 'center',
 				minHeight: 'auto',
-				opacity: 0.9,
 				padding: '20px',
 				backgroundRepeat: 'no-repeat',
 				backgroundSize: 'cover',
@@ -77,8 +70,8 @@ const WhyLearnHalla = () => {
 					src={videoPlaying}
 					autoPlay
 					muted
-					loop
 					playsInline
+					loop
 					style={{
 						width: '100%',
 						height: '100%',
@@ -116,9 +109,7 @@ const WhyLearnHalla = () => {
 									loop={true}
 									onSwiper={(swiper) => {
 										swiperRef.current = swiper;
-									}}
-									onSlideChange={handleSlideChange}>
-									{/* onSlideChangeTransitionEnd could be used if im using activeIndex instead of realIndex */}
+									}}>
 									{whyLearnHalla.map((slide, index) => (
 										<SwiperSlide key={index}>
 											<Box
@@ -130,13 +121,10 @@ const WhyLearnHalla = () => {
 													gap: '20px',
 													padding: '5px',
 												}}>
-												<Box
-													component='video'
+												<LazyVideo
+													ref={(el) => (videoRefs.current[index] = el!)}
 													src={slide.videoUrl}
-													autoPlay
-													muted
-													playsInline
-													loop
+													controls
 													sx={{
 														height: 'auto',
 														width: '100%',
@@ -156,11 +144,11 @@ const WhyLearnHalla = () => {
 															mb: 'auto',
 															color: '#ffdc95',
 															textShadow: `
-															-2px -2px 0 #000, 
-															1px -1px 0 #000,  
-															-1px 1px 0 #000,   
-															1px 1px 0 #000     
-														`,
+																-2px -2px 0 #000, 
+																1px -1px 0 #000,  
+																-1px 1px 0 #000,   
+																1px 1px 0 #000     
+															`,
 														}}>
 														{slide.text}
 													</Typography>
@@ -204,8 +192,7 @@ const WhyLearnHalla = () => {
 										padding: 0,
 										width: '50%',
 									}}>
-									<Box
-										component='img'
+									<LazyImage
 										src={gentleThatch}
 										sx={{
 											width: '100%',
@@ -223,11 +210,11 @@ const WhyLearnHalla = () => {
 											fontFamily: 'fantasy',
 											color: '#ffdc95',
 											textShadow: `
-										-2px -6px 0 #000, 
-										1px -1px 0 #000,  
-										-1px 1px 0 #000,   
-										1px 1px 0 #000     
-										`,
+												-2px -6px 0 #000, 
+												1px -1px 0 #000,  
+												-1px 1px 0 #000,   
+												1px 1px 0 #000     
+											`,
 										}}>
 										Why LearnHalla?
 									</Typography>

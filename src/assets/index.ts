@@ -18,6 +18,7 @@ import faitGlowing from './faitGlowing.webp';
 import elegantMunin from './elegantMunin.webp';
 import evhilRedraptor from './evilRedraptor.webp';
 import korThumbsUp from './korThumbsUp.webp';
+import yumiko from './yumiko.jpg';
 
 export {
 	restHereBrawler,
@@ -40,4 +41,5 @@ export {
 	elegantMunin,
 	evhilRedraptor,
 	korThumbsUp,
+	yumiko,
 };

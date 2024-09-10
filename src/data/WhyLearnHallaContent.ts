@@ -1,4 +1,4 @@
-import { jaeyunClip, alucardClip } from '../assets/videos/index,';
+import { jaeyunClip, alucardClip } from '../assets/videos/index';
 
 export const whyLearnHalla = [
 	{

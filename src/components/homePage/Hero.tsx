@@ -10,10 +10,12 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 // assets
-import { jaeyunPopCorn, login } from '../../assets';
+import { jaeyunPopCorn, yumiko } from '../../assets';
 
 import { slideTexts } from '../../data/HeaderData';
 import SwiperButtons from '../SwiperButtons';
+import LazyBackground from '../LazyBackground';
+import LazyImage from '../LazyImage';
 
 const Hero = () => {
 	const [currentSlide, setCurrentSlide] = useState<number>(0);
@@ -25,7 +27,8 @@ const Hero = () => {
 
 	return (
 		<motion.div style={{ opacity }}>
-			<Box
+			<LazyBackground
+				src={yumiko}
 				sx={{
 					display: 'flex',
 					alignItems: 'center',
@@ -33,13 +36,10 @@ const Hero = () => {
 					minHeight: 'auto',
 					backgroundColor: '#1A2130',
 					padding: '20px',
-					opacity: 0.9,
-					backgroundImage: `url(${login})`,
 					backgroundSize: 'cover',
 					backgroundPosition: 'center',
 					backgroundRepeat: 'no-repeat',
 					backgroundBlendMode: 'overlay',
-					fontFamily: 'Bebas Neue',
 				}}>
 				<Container maxWidth='lg'>
 					<Grid
@@ -65,8 +65,7 @@ const Hero = () => {
 										cursor: 'default',
 										padding: 0,
 									}}>
-									<Box
-										component='img'
+									<LazyImage
 										src={jaeyunPopCorn}
 										alt='Slide 2'
 										sx={{
@@ -109,6 +108,8 @@ const Hero = () => {
 												-1px 1px 0 #000,   
 												1px 1px 0 #000     
 												`,
+											display: '-webkit-box',
+											WebkitLineClamp: 2,
 										}}>
 										{currentSlideText}
 									</Typography>
@@ -166,7 +167,7 @@ const Hero = () => {
 						</Grid>
 					</Grid>
 				</Container>
-			</Box>
+			</LazyBackground>
 		</motion.div>
 	);
 };

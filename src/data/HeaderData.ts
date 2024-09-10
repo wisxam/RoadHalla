@@ -40,7 +40,7 @@ export const weapons = [
 
 export const slideTexts = [
 	{
-		text: 'Learn and master all the available weapons with ease.',
+		text: 'Learn and master all the available weapons till perfection with ease.',
 		image: allWeaponsGoldforged,
 	},
 	{

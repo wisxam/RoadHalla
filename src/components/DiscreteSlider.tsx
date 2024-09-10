@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
-import { brawlhallaValues } from '../data/sliderData';
+import { brawlhallaValues } from '../data/SliderData';
 
 export default function DiscreteSlider({
 	onChange,
@@ -10,7 +10,11 @@ export default function DiscreteSlider({
 	return (
 		<Box
 			sx={{
-				width: { xs: 'auto', md: '800px' },
+				width: {
+					xs: '100%',
+					sm: '100%',
+					md: '100%',
+				},
 			}}>
 			<Slider
 				onChange={(_, newValue) =>
@@ -42,7 +46,7 @@ export default function DiscreteSlider({
                       `,
 					},
 					'& .MuiSlider-track': {
-						color: '#1A2130',
+						color: '#FFF5E1',
 					},
 					'& .MuiSlider-rail': {
 						color: '#C80036',
