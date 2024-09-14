@@ -1,21 +1,30 @@
 import { Box, Container, Typography, Grid, IconButton } from '@mui/material';
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
-import { motion, useTransform, useScroll } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
+// import { useTransform, useScroll } from 'framer-motion';
 import 'swiper/css';
 import { whyLearnHalla } from '../../data/WhyLearnHallaContent';
 import { gentleThatch } from '../../assets';
 import { useRef, useState, useEffect } from 'react';
 import SwiperButtons from '../SwiperButtons';
-import LazyVideo from '../LazyVideo'; // Import the LazyVideo component
-import LazyImage from '../LazyImage';
+import LazyVideo from '../lazy/LazyVideo';
+import LazyImage from '../lazy/LazyImage';
 
 const WhyLearnHalla = () => {
 	const videoRefs = useRef<HTMLVideoElement[]>([]);
 	const swiperRef = useRef<SwiperClass | null>(null);
 	const [videoPlaying, setVideoPlaying] = useState(whyLearnHalla[0].videoUrl);
 	const [isBackgroundAnimating, setIsBackgroundAnimating] = useState(false);
-	const { scrollY } = useScroll();
-	const opacity = useTransform(scrollY, [800, 1900], [1, 0]);
+	// const { scrollY } = useScroll();
+	// const opacity = useTransform(scrollY, [800, 1900], [1, 0]);
+	const ref = useRef(null);
+	const isInView = useInView(ref, { once: false });
+
+	const slideVariants = {
+		hiddenRight: { x: '100vw', opacity: 0 },
+		hiddenLeft: { x: '-100vw', opacity: 0 },
+		visible: { x: 0, opacity: 1 },
+	};
 
 	useEffect(() => {
 		const handleSlideChange = (swiper: SwiperClass) => {
@@ -42,6 +51,7 @@ const WhyLearnHalla = () => {
 
 	return (
 		<Box
+			ref={ref}
 			sx={{
 				display: 'flex',
 				alignItems: 'center',
@@ -103,69 +113,68 @@ const WhyLearnHalla = () => {
 								mt: { md: '50px' },
 								mb: 'auto',
 							}}>
-							<motion.div style={{ opacity }}>
-								<Swiper
-									slidesPerView={1}
-									loop={true}
-									onSwiper={(swiper) => {
-										swiperRef.current = swiper;
-									}}>
-									{whyLearnHalla.map((slide, index) => (
-										<SwiperSlide key={index}>
-											<Box
+							<Swiper
+								slidesPerView={1}
+								loop={true}
+								onSwiper={(swiper) => {
+									swiperRef.current = swiper;
+								}}>
+								{whyLearnHalla.map((slide, index) => (
+									<SwiperSlide key={index}>
+										<Box
+											sx={{
+												display: 'flex',
+												flexDirection: 'column',
+												alignItems: 'center',
+												minHeight: 'auto',
+												gap: '20px',
+												padding: '5px',
+											}}>
+											<LazyVideo
+												ref={(el) => (videoRefs.current[index] = el!)}
+												src={slide.videoUrl}
+												controls
 												sx={{
-													display: 'flex',
-													flexDirection: 'column',
-													alignItems: 'center',
-													minHeight: 'auto',
-													gap: '20px',
-													padding: '5px',
-												}}>
-												<LazyVideo
-													ref={(el) => (videoRefs.current[index] = el!)}
-													src={slide.videoUrl}
-													controls
+													height: '100%',
+													width: '100%',
+													minHeight: '150px',
+													maxHeight: '250px',
+													borderRadius: '12px',
+												}}
+											/>
+											<motion.div
+												initial={{ opacity: 0, x: -20 }}
+												animate={{ opacity: 1, x: 0 }}
+												transition={{ duration: 0.5 }}>
+												<Typography
+													variant='h4'
 													sx={{
-														height: 'auto',
-														width: '100%',
-														maxHeight: '250px',
-														borderRadius: '12px',
-													}}
-												/>
-												<motion.div
-													initial={{ opacity: 0, x: -20 }}
-													animate={{ opacity: 1, x: 0 }}
-													transition={{ duration: 0.5 }}>
-													<Typography
-														variant='h4'
-														sx={{
-															fontFamily: 'fantasy',
-															marginTop: { xs: 'auto', md: '20px' },
-															mb: 'auto',
-															color: '#ffdc95',
-															textShadow: `
+														fontFamily: 'fantasy',
+														marginTop: { xs: 'auto', md: '20px' },
+														mb: 'auto',
+														color: '#ffdc95',
+														textShadow: `
 																-2px -2px 0 #000, 
 																1px -1px 0 #000,  
 																-1px 1px 0 #000,   
 																1px 1px 0 #000     
 															`,
-														}}>
-														{slide.text}
-													</Typography>
-												</motion.div>
-											</Box>
-										</SwiperSlide>
-									))}
-								</Swiper>
-								<Box sx={{ mt: 'auto' }}>
-									<SwiperButtons
-										swiperRef={swiperRef}
-										primaryVariant='#1A2130'
-										secondaryVariant='#FFF5E1'
-										hoverVariant='#5F5959'
-									/>
-								</Box>
-							</motion.div>
+													}}>
+													{slide.text}
+												</Typography>
+											</motion.div>
+										</Box>
+									</SwiperSlide>
+								))}
+							</Swiper>
+							<Box sx={{ mt: 'auto' }}>
+								<SwiperButtons
+									swiperRef={swiperRef}
+									primaryVariant='#1A2130'
+									secondaryVariant='#FFF5E1'
+									hoverVariant='#5F5959'
+								/>
+							</Box>
 						</Box>
 					</Grid>
 					<Grid
@@ -183,7 +192,11 @@ const WhyLearnHalla = () => {
 								alignItems: 'center',
 								gap: 2,
 							}}>
-							<motion.div style={{ opacity }}>
+							<motion.div
+								variants={slideVariants}
+								initial='hiddenRight'
+								animate={isInView ? 'visible' : 'hiddenRight'}
+								transition={{ type: 'tween', duration: 0.7 }}>
 								<IconButton
 									disabled
 									sx={{
@@ -200,25 +213,24 @@ const WhyLearnHalla = () => {
 											objectFit: 'cover',
 											borderRadius: '12px',
 										}}
+										loadingStyle='tailChase'
 									/>
 								</IconButton>
-								<Box>
-									<Typography
-										variant='h2'
-										gutterBottom
-										sx={{
-											fontFamily: 'fantasy',
-											color: '#ffdc95',
-											textShadow: `
+								<Typography
+									variant='h2'
+									gutterBottom
+									sx={{
+										fontFamily: 'fantasy',
+										color: '#ffdc95',
+										textShadow: `
 												-2px -6px 0 #000, 
 												1px -1px 0 #000,  
 												-1px 1px 0 #000,   
 												1px 1px 0 #000     
 											`,
-										}}>
-										Why LearnHalla?
-									</Typography>
-								</Box>
+									}}>
+									Why LearnHalla?
+								</Typography>
 							</motion.div>
 						</Box>
 					</Grid>

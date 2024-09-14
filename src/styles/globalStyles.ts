@@ -1,4 +1,5 @@
 import { createTheme } from '@mui/material';
+import { yumiko } from '../assets';
 
 const theme = createTheme({
 	palette: {
@@ -21,6 +22,13 @@ const globalStyles = {
 		height: '100%',
 		backgroundColor: '#1A2130',
 		overflowX: 'hidden',
+		minHeight: 'auto',
+		backgroundImage: `url(${yumiko})`,
+		backgroundSize: 'cover',
+		backgroundPosition: 'center',
+		backgroundRepeat: 'no-repeat',
+		backgroundBlendMode: 'overlay',
+		backgroundAttachment: 'fixed',
 	},
 	'#root': {
 		minHeight: '100%',

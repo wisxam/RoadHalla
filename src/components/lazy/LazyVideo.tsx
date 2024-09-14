@@ -41,21 +41,15 @@ const LazyVideo = React.forwardRef<HTMLVideoElement, LazyVideoProps>(
 			<Box
 				sx={{
 					...sx,
-					position: 'relative',
-					width: 'auto',
-					height: 'auto',
 				}}>
 				<video
 					ref={videoRef}
 					controls={controls}
 					style={{
-						width: '100%',
-						height: '100%',
-						objectFit: 'cover',
-						transition: 'opacity 0.5s ease-in-out',
-						borderRadius: '12px',
+						...sx,
 					}}
 					playsInline
+					autoPlay
 					loop
 					muted>
 					<source

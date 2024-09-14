@@ -1,16 +1,16 @@
 import { Box, Container, Grid, IconButton, Typography } from '@mui/material';
+import { motion, useInView } from 'framer-motion';
+import { useState, useRef } from 'react';
 import DiscreteSlider from '../DiscreteSlider';
 import { brawlhallaValues } from '../../data/SliderData';
-import { motion } from 'framer-motion';
-import { useState } from 'react';
-import { yumiko } from '../../assets';
-import LazyBackground from '../LazyBackground';
-import LazyImage from '../LazyImage';
+import LazyImage from '../lazy/LazyImage';
 
 const Advantages = () => {
 	const [currentSliderValue, setCurrentSliderValue] = useState(
 		brawlhallaValues[0].value || 0
 	);
+	const ref = useRef(null);
+	const isInView = useInView(ref, { once: true, margin: '0px' });
 
 	const handleSliderChange = (newValue: number) => {
 		setCurrentSliderValue(newValue);
@@ -21,41 +21,34 @@ const Advantages = () => {
 	);
 
 	return (
-		<LazyBackground
-			src={yumiko}
+		<Box
+			ref={ref}
 			sx={{
 				display: 'flex',
 				alignItems: 'center',
 				justifyContent: 'center',
 				minHeight: 'auto',
-				backgroundColor: '#1A2130',
+				backgroundColor: 'rgba(26, 33, 48, 0.5)',
 				padding: '20px',
-				backgroundSize: 'cover',
-				backgroundPosition: 'center',
-				backgroundRepeat: 'no-repeat',
-				backgroundBlendMode: 'overlay',
 			}}>
 			<Container maxWidth='lg'>
-				<Grid
-					container
-					justifyContent='center'>
-					<Typography
-						variant='h4'
-						sx={{
-							textAlign: 'center',
-							fontFamily: 'fantasy',
-							marginTop: { xs: 'auto', md: '20px' },
-							mb: 'auto',
-							color: '#ffdc95',
-							textShadow: `
+				<Typography
+					variant='h4'
+					sx={{
+						textAlign: 'center',
+						fontFamily: 'fantasy',
+						marginTop: { xs: 'auto', md: '20px' },
+						mb: 'auto',
+						color: '#ffdc95',
+						textShadow: `
                             -2px -2px 0 #000, 
                             1px -1px 0 #000,  
                             -1px 1px 0 #000,   
                             1px 1px 0 #000`,
-						}}>
-						LearnHalla will ensure:
-					</Typography>
-				</Grid>
+					}}>
+					LearnHalla will ensure:
+				</Typography>
+
 				<Grid
 					container
 					justifyContent='center'
@@ -77,8 +70,10 @@ const Advantages = () => {
 							}}>
 							<motion.div
 								key={currentSliderValue}
-								initial={{ opacity: 0, x: 0 }}
-								animate={{ opacity: 1, x: 0 }}
+								initial={{ opacity: 0, x: 50 }}
+								animate={
+									isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }
+								}
 								transition={{ duration: 0.7 }}
 								style={{
 									display: 'flex',
@@ -105,6 +100,7 @@ const Advantages = () => {
 											objectFit: 'cover',
 											borderRadius: '12px',
 										}}
+										loadingStyle='zoomies'
 									/>
 								</IconButton>
 								<Typography
@@ -126,7 +122,8 @@ const Advantages = () => {
 					</Grid>
 				</Grid>
 			</Container>
-		</LazyBackground>
+		</Box>
 	);
 };
+
 export default Advantages;

@@ -1,45 +1,44 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+// import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
+// import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Menu from '@mui/material/Menu';
+// import Menu from '@mui/material/Menu';
 import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
-import MenuItem from '@mui/material/MenuItem';
+// import Button from '@mui/material/Button';
+// import MenuItem from '@mui/material/MenuItem';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import IconButton from '@mui/material/IconButton';
-import { weapons } from '../../data/HeaderData';
 import { temporaryLogoNoBg } from '../../assets';
-import MenuIcon from '@mui/icons-material/Menu';
-import MenuOpenIcon from '@mui/icons-material/MenuOpen';
-import { Typography } from '@mui/material';
+// import MenuIcon from '@mui/icons-material/Menu';
+// import MenuOpenIcon from '@mui/icons-material/MenuOpen';
+// import { Typography } from '@mui/material';
 
 const Header = () => {
-	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-	const [mobileMenuOpen, setMobileMenuOpen] = useState<null | HTMLElement>(
-		null
-	);
-	const navigate = useNavigate();
-	const [menuBarOpen, setMenuBarOpen] = useState(false);
+	// const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+	// const [mobileMenuOpen, setMobileMenuOpen] = useState<null | HTMLElement>(
+	// 	null
+	// );
+	// const navigate = useNavigate();
+	// const [menuBarOpen, setMenuBarOpen] = useState(false);
 
-	const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-		setAnchorEl(event.currentTarget);
-	};
+	// const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+	// 	setAnchorEl(event.currentTarget);
+	// };
 
-	const handleClose = () => {
-		setAnchorEl(null);
-	};
+	// const handleClose = () => {
+	// 	setAnchorEl(null);
+	// };
 
-	const handleMobileMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
-		setMenuBarOpen(!menuBarOpen);
-		setMobileMenuOpen(event.currentTarget);
-	};
+	// const handleMobileMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
+	// 	setMenuBarOpen(!menuBarOpen);
+	// 	setMobileMenuOpen(event.currentTarget);
+	// };
 
-	const handleMobileMenuClose = () => {
-		setMenuBarOpen(!menuBarOpen);
-		setMobileMenuOpen(null);
-	};
+	// const handleMobileMenuClose = () => {
+	// 	setMenuBarOpen(!menuBarOpen);
+	// 	setMobileMenuOpen(null);
+	// };
 
 	const { scrollY } = useScroll();
 	const opacity = useTransform(scrollY, [0, 300], [1, 0]);
@@ -74,8 +73,9 @@ const Header = () => {
 							color='inherit'
 							aria-label='menu'
 							sx={{ display: { xs: 'block', md: 'none' } }}
-							onClick={handleMobileMenuOpen}>
-							{menuBarOpen ? <MenuOpenIcon /> : <MenuIcon />}
+							// onClick={handleMobileMenuOpen}
+						>
+							{/* {menuBarOpen ? <MenuOpenIcon /> : <MenuIcon />} */}
 						</IconButton>
 						<Link to='/'>
 							<img
@@ -85,7 +85,7 @@ const Header = () => {
 								alt='Logo'
 							/>
 						</Link>
-						<Box
+						{/* <Box
 							sx={{
 								flexGrow: 1,
 								display: { xs: 'none', md: 'flex' },
@@ -106,8 +106,8 @@ const Header = () => {
 								className='font-bold translate-x-10 hover:font-black hover:text-[#9AC8CD]'
 								sx={{ fontSize: 23, color: '#FFF5E1' }}>
 								Weapons
-							</Button>
-							<Menu
+							</Button> */}
+						{/* <Menu
 								anchorEl={anchorEl}
 								open={Boolean(anchorEl)}
 								onClose={handleClose}
@@ -180,7 +180,7 @@ const Header = () => {
 									/>
 								</MenuItem>
 							))}
-						</Menu>
+						</Menu> */}
 					</Toolbar>
 				</Container>
 			</AppBar>

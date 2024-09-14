@@ -1,14 +1,20 @@
 import { useEffect, useRef, useState } from 'react';
-import { Box, CircularProgress } from '@mui/material';
+import { Box } from '@mui/material';
+import { zoomies, tailChase } from 'ldrs';
+
+tailChase.register();
+zoomies.register();
 
 const LazyImage = ({
 	src,
 	alt = '',
 	sx,
+	loadingStyle = '',
 }: {
 	src: string;
 	alt?: string;
 	sx?: React.CSSProperties;
+	loadingStyle?: string;
 }) => {
 	const [loaded, setLoaded] = useState(false);
 	const imgRef = useRef<HTMLImageElement>(null);
@@ -38,32 +44,31 @@ const LazyImage = ({
 	}, [src]);
 
 	return (
-		<Box
-			sx={{
-				...sx,
-				position: 'relative',
-				width: 'auto',
-				height: 'auto',
-			}}>
+		<Box sx={{ ...sx }}>
 			{!loaded && (
-				<Box
-					sx={{
-						...sx,
-					}}>
-					<CircularProgress />
+				<Box sx={{ ...sx }}>
+					{loadingStyle === 'zoomies' && (
+						<l-zoomies
+							size='40'
+							speed='1.75'
+							color='#ADD8E6'
+						/>
+					)}
+					{loadingStyle === 'tailChase' && (
+						<l-tail-chase
+							size='40'
+							bg-opacity='0.1'
+							speed='1.75'
+							color='#ADD8E6'
+						/>
+					)}
 				</Box>
 			)}
 			<img
 				ref={imgRef}
 				src={loaded ? src : ''}
 				alt={alt}
-				style={{
-					width: '100%',
-					height: '100%',
-					objectFit: 'cover',
-					opacity: loaded ? 1 : 0,
-					transition: 'opacity 0.5s ease-in-out',
-				}}
+				style={{ ...sx }}
 			/>
 		</Box>
 	);

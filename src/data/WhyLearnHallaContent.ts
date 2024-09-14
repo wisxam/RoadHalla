@@ -1,4 +1,4 @@
-import { jaeyunClip, alucardClip } from '../assets/videos/index';
+import { jaeyunClip, alucardClip, twosGuantlets } from '../assets/videos/index';
 
 export const whyLearnHalla = [
 	{
@@ -10,19 +10,7 @@ export const whyLearnHalla = [
 		videoUrl: alucardClip,
 	},
 	{
-		text: '3. Learn from the Best: Access content created by top players and experts, giving you insider tips and techniques to enhance your gameplay.',
-		videoUrl: jaeyunClip,
-	},
-	{
-		text: '4. Stay Ahead of the Meta: Keep up with the latest updates and strategies to stay ahead in the ever-evolving Brawlhalla meta.',
-		videoUrl: alucardClip,
-	},
-	{
-		text: '5. Accessible Anytime, Anywhere: Learn and practice on the go with our platform optimized for all devices, so you can improve wherever you are.',
-		videoUrl: jaeyunClip,
-	},
-	{
-		text: '6. Join a Passionate Community: Be part of a dedicated community focused on mastering Brawlhalla and helping each other succeed.',
-		videoUrl: alucardClip,
+		text: '3. Join a Passionate Community: Be part of a dedicated community focused on mastering Brawlhalla and helping each other succeed.',
+		videoUrl: twosGuantlets,
 	},
 ];
